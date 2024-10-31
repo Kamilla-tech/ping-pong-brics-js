@@ -7,10 +7,8 @@ export default class Paddle {
     constructor () {
         this.renderer = Renderer.getInstance();
         this.canvas = this.renderer.getCanvas();
-        
         this.x = (this.canvas.width - this.width) / 2;
         this.y = this.canvas.height - this.height;
-        
         this.addListeners();
     }
     

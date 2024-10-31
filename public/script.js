@@ -47,6 +47,10 @@ class Game {
             this.ball.restart();
         }
         
+        if (this.bricks.detectBallCollision(this.ball)) {
+            this.score++;
+        }
+        
         if (this.lives <= 0) {
             console.log("koniec żyć, restart gry");
             this.restart();
@@ -58,6 +62,7 @@ class Game {
     render = () => {
         this.renderer.clearCanvas();
         
+        this.bricks.drawAll();
         this.paddle.draw();
         this.ball.draw();
     }
