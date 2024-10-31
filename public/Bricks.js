@@ -78,7 +78,26 @@ export default class Bricks {
                 }
             }
         }
+        
+        return false;
     }
     
-    return = false;
+    checkAllBricksDestroyed = () => {
+            for (let r = 0; r < this.numRows; r++) {
+                for (let c = 0; c < this.numCols; c++) {
+                    const b = this.bricks[r][c];
+                    
+                    if (b.alive) {
+                        return false;
+                    }
+                }
+            }
+            
+            return true;
+        }
+        
+       restart = () => {
+        this.generateBricks();
+       } 
 }
+

@@ -34,25 +34,30 @@ class Game {
     }
     
     updateGame = () => {
-        
+
         this.ball.update();
         if (this.ball.checkPaddleCollision(this.paddle)) {
             console.log("odbicie piłki paletką");
             this.paddleBallHit;
         }
-        
-        if (this.ball.checkBottomWallCollision() ) {
+
+        if (this.ball.checkBottomWallCollision()) {
             console.log("strata życia");
             this.lives--;
             this.ball.restart();
         }
-        
+
         if (this.bricks.detectBallCollision(this.ball)) {
             this.score++;
         }
-        
+
         if (this.lives <= 0) {
             console.log("koniec żyć, restart gry");
+            this.restart();
+        }
+        
+        if (this.bricks.checkAllBricksDestroyed()) {
+            console.log("Gracz zniszczył wszystkie cegły");
             this.restart();
         }
         
@@ -65,12 +70,19 @@ class Game {
         this.bricks.drawAll();
         this.paddle.draw();
         this.ball.draw();
+        
+        this.renderer.drawText("Punkty:" + this.score,
+            10, 20, "black", "20 px Verdana");
+        
+        this.renderer.drawText("Życia:" + this.lives,
+            130, 20, "black", "20px Verdana");
     }
     
     restart =() => {
         this.ball.restart();
         this.score = 0;
         this.lives = 4;
+        this.bricks.restart();
     }
         
 }
